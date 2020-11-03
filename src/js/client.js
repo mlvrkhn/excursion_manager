@@ -4,13 +4,22 @@ import ExcursionsAPI from './ExcursionsAPI';
 
 console.log('client');
 
+// get and render excursions
+const api = new ExcursionsAPI();
+api.getExcursionsList();
+api.renderExcursions();
+
+
+
+
+// zamawianie
+
 // get form 
 // catch and validate data
 // save send data to Excursion (?) or server?
 
 // get form 
 const excursionForm = document.forms[0];
-console.log("excursionForm", excursionForm)
 const formFields = excursionForm.elements;
 
 excursionForm.addEventListener('submit', e => {
