@@ -9,9 +9,6 @@ const api = new ExcursionsAPI();
 api.getExcursionsList();
 api.renderExcursions();
 
-
-
-
 // zamawianie
 
 // get form 
