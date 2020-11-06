@@ -7,7 +7,7 @@
     <title>JavaScript: API oraz FETCH - client, devmentor.pl</title>
 </head>
 <body>
-
+    <h1>Panel użytkownika</h1>
     <section class="panel">
         <ul class="panel__excursions excursions">
             <li class="excursions__item excursions__item--prototype">
@@ -18,18 +18,24 @@
                 <form class="excursions__form">
                     <div class="excursions__field">
                         <label class="excursions__field-name">
-                            Dorosły: 99PLN x <input class="excursions__field-input" name="adults" />
+                            Dorosły:
+                            <input class="excursions__field-input-adult" name="adult"/>
+                            x
+                            <span class="excursions__field-price-adult">50</span> PLN
                         </label>
                     </div>
                     <div class="excursions__field">
                         <label class="excursions__field-name">
-                            Dziecko: 50PLN x <input class="excursions__field-input" name="children" />
+                            Dziecko:
+                            <input class="excursions__field-input-child" name="children" />
+                            x
+                            <span class="excursions__field-price-child">50</span> PLN
                         </label>
                     </div>
                     <div class="excursions__field excursions__field--submit">
                         <input 
                             class="excursions__field-input excursions__field-input--submit" 
-                            value="dodaj do zamówinia"
+                            value="dodaj do zamówienia"
                             type="submit"
                         />
                     </div>

@@ -1,26 +1,52 @@
 {
   "excursions": [
     {
+      "name": "Grecja",
+      "description": "Martin",
+      "adultPrice": "88",
+      "childPrice": "99",
+      "id": 1
+    },
+    {
+      "name": "dark olive green",
+      "description": "dsadsad",
+      "adultPrice": "1212",
+      "childPrice": "2121",
+      "id": 2
+    },
+    {
+      "name": "dark olive green",
+      "description": "dsadsad",
+      "adultPrice": "1212",
+      "childPrice": "2121",
+      "id": 3
+    }
+  ],
+  "orders": [
+    {
       "name": "Martin Gawlyta",
       "description": "aaaaaaaaad",
       "adultPrice": "123",
       "childPrice": "312",
-      "id": 1
+      "nrAdult": "3444",
+      "nrChild": 4444,
+      "id": 5
     },
     {
-      "name": "Oklachoma",
-      "description": "ALSD",
-      "adultPrice": "121",
-      "childPrice": "211",
-      "id": 2
+      "name": "dark olive green",
+      "adultPrice": "1212",
+      "childPrice": "2121",
+      "nrAdult": "32",
+      "nrChild": 22,
+      "id": 6
     },
     {
-      "name": "Martin Gawlyta",
-      "description": "dasda",
-      "adultPrice": "22",
-      "childPrice": "12",
-      "id": 3
+      "name": "dark olive green",
+      "adultPrice": "1212",
+      "childPrice": "2121",
+      "nrAdult": 3,
+      "nrChild": 2,
+      "id": 7
     }
-  ],
-  "orders": []
+  ]
 }

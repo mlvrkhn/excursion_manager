@@ -5,6 +5,7 @@ class ExcursionsView {
     constructor() {
         this.excursionRoot = document.querySelector('.panel__excursions');
         this.excursionProto = document.querySelector('.excursions__item--prototype');
+        this.excursionProtoSelector = 'excursions__item--prototype';
     };
 
     _renderExcursions() {
@@ -16,12 +17,11 @@ class ExcursionsView {
                 newElement.classList.remove(this.excursionProtoSelector);
                 newElement.querySelector('.excursions__title').textContent = excursion.name;
                 newElement.querySelector('.excursions__description').textContent = excursion.description;
-                newElement.querySelector('.excursions__adult-price').textContent = excursion.adultPrice;
-                newElement.querySelector('.excursions__child-price').textContent = excursion.childPrice;
+                newElement.querySelector('.excursions__field-price-adult').textContent = excursion.adultPrice;
+                newElement.querySelector('.excursions__field-price-child').textContent = excursion.childPrice;
                 newElement.dataset.id = excursion.id;
                 this.excursionRoot.appendChild(newElement);
             });
-
         });
 
     }
@@ -49,6 +49,13 @@ class ExcursionsView {
             return body.classList.add('background__blur');
         }
         return;
+    }
+    _displayBasket() {
+        const basketRoot = document.querySelector('.panel__summary');
+        console.log('hejka');
+        admin.getOrders().then(resp => {
+            console.log(resp);
+        });
     }
 }
 

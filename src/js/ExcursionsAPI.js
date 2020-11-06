@@ -16,7 +16,6 @@ class ExcursionsAPI {
         this.excursionProto = document.querySelector('.excursions__item--prototype');
         this.excursionsAPI = 'http://localhost:3000/excursions/';
         this.ordersAPI = 'http://localhost:3000/orders/';
-        // this.maxId = null;
     };
 
     // ************************
@@ -26,18 +25,32 @@ class ExcursionsAPI {
     getExcursions() {
         return this._getFromServer(this.excursionsAPI)
     };
-
     addExcursion(data) {
         return this._sendToServer(this.excursionsAPI, data);
     };
-
     editExcursion(id, data) {
         return this._updateToServer(this.excursionsAPI, data, id)
     }
-
     deleteExcursion(id) {
-        console.log('deleting...');
         return this._deleteFromServer(this.excursionsAPI, id)
+    }
+    // ************************
+    // **** ORDER LIST ****
+    // ************************
+
+    getOrders() {
+        return this._getFromServer(this.ordersAPI)
+    };
+
+    addOrder(data) {
+        return this._sendToServer(this.ordersAPI, data);
+    };
+
+    editOrder(id, data) {
+        return this._updateToServer(this.ordersAPI, data, id)
+    }
+    deleteOrder(id) {
+        return this._deleteFromServer(this.ordersAPI, id)
     }
 
     // *******************************
@@ -49,6 +62,7 @@ class ExcursionsAPI {
     };
 
     _sendToServer(url, data) {
+
         const jsonData = JSON.stringify(data);
 
         const options = {
@@ -92,7 +106,7 @@ class ExcursionsAPI {
                 return Promise.reject(resp);
             } else {
                 return resp.json();
-                this._renderExcursions();
+                // this._renderExcursions();
             }
         })
         
@@ -100,13 +114,6 @@ class ExcursionsAPI {
         //     console.log(err);
         // })
     }
-
-
-    
-    
-    _getId() {
-
-    }    
 }
 
 export default ExcursionsAPI;
