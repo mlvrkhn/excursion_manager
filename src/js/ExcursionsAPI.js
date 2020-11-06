@@ -27,13 +27,12 @@ class ExcursionsAPI {
         return this._fetch(this.excursionsAPI)
     };
 
-    addExcursion(excursionData) {
-        console.log('addExc');
-        return this._sendToServer(this.excursionsAPI, excursionData);
+    addExcursion(data) {
+        return this._sendToServer(this.excursionsAPI, data);
     };
 
-    editExcursion(id, excursionData) {
-        console.log('editExcursion()');
+    editExcursion(id, data) {
+        return this._updateToServer(this.excursionsAPI, data, id)
     }
 
     deleteExcursion(id) {
