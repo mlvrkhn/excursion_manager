@@ -1,39 +1,25 @@
 {
   "excursions": [
     {
-      "name": "",
-      "description": "",
-      "adultPrice": "",
-      "childPrice": "",
+      "name": "Martin Gawlyta",
+      "description": "aaaaaaaaad",
+      "adultPrice": "123",
+      "childPrice": "312",
       "id": 1
     },
     {
-      "name": "",
-      "description": "dadadaddadadadadadad",
-      "adultPrice": "1",
-      "childPrice": "1",
+      "name": "Oklachoma",
+      "description": "ALSD",
+      "adultPrice": "121",
+      "childPrice": "211",
+      "id": 2
+    },
+    {
+      "name": "Martin Gawlyta",
+      "description": "dasda",
+      "adultPrice": "22",
+      "childPrice": "12",
       "id": 3
-    },
-    {
-      "name": "",
-      "description": "",
-      "adultPrice": "",
-      "childPrice": "",
-      "id": 4
-    },
-    {
-      "name": "",
-      "description": "",
-      "adultPrice": "",
-      "childPrice": "",
-      "id": 5
-    },
-    {
-      "name": "",
-      "description": "",
-      "adultPrice": "",
-      "childPrice": "",
-      "id": 6
     }
   ],
   "orders": []

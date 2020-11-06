@@ -1,16 +1,19 @@
 import './../css/admin.css';
 import ExcursionsAPI from './ExcursionsAPI';
+import ExcursionsView from './ExcursionsView';
 
 console.log('admin');
 
 const newExcursionForm = document.querySelector('.form');
 const admin = new ExcursionsAPI();
+const view = new ExcursionsView();
 
 
 
 // document.addEventListener('DOMContentLoaded', init);
-
-admin._renderExcursions();
+// admin.getExcursions().then(excursions => view._renderExcursions(excursions));
+view._renderExcursions()
+;
 
 
 function init() {
@@ -34,7 +37,7 @@ newExcursionForm.addEventListener('submit', e => {
         childPrice: elements.price__child.value
     };
 
-    admin.addExcursion(excursion).then(() => admin._renderExcursions())
+    admin.addExcursion(excursion).then(() => view._renderExcursions())
 });
 
 const panels = document.querySelectorAll('.excursions');
@@ -49,21 +52,18 @@ panels.forEach(panel => {
         if (target.value === 'usuń') {
             if (idToDelete && idToDelete > 0) {
                 admin.deleteExcursion(idToDelete).then(() => {
-                    admin._renderExcursions()
+                    view._renderExcursions()
                 });
             }
         }
         if (target.value === 'edytuj') {
 
-            const editForm = document.querySelector('.form').cloneNode(true);
-            editForm.classList.add('form__edit', 'form__active');
-            const root = document.querySelector('.section__forms');
-            // parent.innerHTML = '';
+            const editForm = createEditForm();
+            const root = document.querySelector('body');
             root.appendChild(editForm);
-            document.querySelector('.form__add').style.display = 'none';
+            view._blurBackground(true);
             
             editForm.addEventListener('submit', click => {
-
                 click.preventDefault();
 
                 const elements = click.target.elements;
@@ -75,10 +75,24 @@ panels.forEach(panel => {
                     adultPrice: elements.price__adult.value,
                     childPrice: elements.price__child.value
                 }
+
                 editForm.classList.remove('form__active');
-                admin.editExcursion(id, dataToUpdate).then(() => admin._renderExcursions()).catch(err => console.log(err));
+                view._blurBackground(false);
+                admin.editExcursion(id, dataToUpdate).then(() => {
+                    const excursions = admin.getExcursions();
+                    view._renderExcursions(excursions);
+                }).catch(err => console.log(err));
             });
             
+        }
+        function createEditForm() {
+            const editForm = document.querySelector('.form').cloneNode(true);
+            editForm.classList.add('form__edit', 'form__active');
+            const editInfo = 'Enter new excursion data and click enter';
+            const editHeader = document.createElement('h3');
+            editHeader.innerText = editInfo;
+            editForm.prepend(editHeader);
+            return editForm;
         }
     })
 });

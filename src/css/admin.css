@@ -4,9 +4,15 @@
     box-sizing: border-box;
     background-color: dimgray;
 }
+h1 {
+    padding: 30px 30px;
+}
 
 ul {
     list-style: none;
+}
+p {
+    overflow-wrap: break-word;
 }
 
 .panel {
@@ -14,6 +20,7 @@ ul {
     margin: 0 auto;
     max-width: 1200px;
     padding: 30px 0;
+    justify-content: space-between;
 }
 
 .panel__excursins {
@@ -57,6 +64,15 @@ ul {
 }
 .excursions__item {
     width: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.excursions__item >  {
+    background-color: aqua;
+}
+.excursions__field {
+    margin: 5px 0;
 }
 .editPrompt {
     position: absolute;
@@ -76,4 +92,7 @@ ul {
 }
 .form__active {
     display: block;
+}
+.background__blur {
+    filter: blur(4px);
 }
