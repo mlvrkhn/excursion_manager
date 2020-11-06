@@ -1,10 +1,10 @@
 {
   "excursions": [
     {
-      "name": "dad",
-      "description": "dasda",
-      "adultPrice": "121",
-      "childPrice": "12",
+      "name": "",
+      "description": "",
+      "adultPrice": "",
+      "childPrice": "",
       "id": 1
     },
     {
@@ -15,17 +15,17 @@
       "id": 3
     },
     {
-      "name": "forrest green",
-      "description": "bb",
-      "adultPrice": "11",
-      "childPrice": "1",
+      "name": "",
+      "description": "",
+      "adultPrice": "",
+      "childPrice": "",
       "id": 4
     },
     {
-      "name": "forrest green",
-      "description": "bb",
-      "adultPrice": "11",
-      "childPrice": "1",
+      "name": "",
+      "description": "",
+      "adultPrice": "",
+      "childPrice": "",
       "id": 5
     },
     {

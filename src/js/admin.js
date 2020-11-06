@@ -56,7 +56,7 @@ panels.forEach(panel => {
         if (target.value === 'edytuj') {
 
             const editForm = document.querySelector('.form').cloneNode(true);
-            editForm.classList.add('form__edit');
+            editForm.classList.add('form__edit', 'form__active');
             const root = document.querySelector('.section__forms');
             // parent.innerHTML = '';
             root.appendChild(editForm);
@@ -65,7 +65,7 @@ panels.forEach(panel => {
             editForm.addEventListener('submit', click => {
 
                 click.preventDefault();
-                console.log('klk');
+
                 const elements = click.target.elements;
                 const id = parent.dataset.id;
                 
@@ -75,6 +75,7 @@ panels.forEach(panel => {
                     adultPrice: elements.price__adult.value,
                     childPrice: elements.price__child.value
                 }
+                editForm.classList.remove('form__active');
                 admin.editExcursion(id, dataToUpdate).then(() => admin._renderExcursions()).catch(err => console.log(err));
             });
             
