@@ -44,8 +44,8 @@ function getOrderData(event) {
 
     const nrAdult = parseInt(root.querySelector('.excursions__field-input-adult').value);
     const nrChild = parseInt(root.querySelector('.excursions__field-input-child').value);
-    const adultPrice = root.querySelector('.excursions__field-price-adult').innerText;
-    const childPrice = root.querySelector('.excursions__field-price-child').innerText;
+    const adultPrice = parseInt(root.querySelector('.excursions__field-price-adult').innerText);
+    const childPrice = parseInt(root.querySelector('.excursions__field-price-child').innerText);
 
     const order = {
         name,

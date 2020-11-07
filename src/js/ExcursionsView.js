@@ -9,7 +9,6 @@ class ExcursionsView {
     };
 
     _renderExcursions() {
-
         this._cleanExcursionView();
         admin.getExcursions().then(excursions => {
             excursions.forEach(excursion => {
@@ -51,10 +50,31 @@ class ExcursionsView {
         return;
     }
     _displayBasket() {
-        const basketRoot = document.querySelector('.panel__summary');
-        console.log('hejka');
         admin.getOrders().then(resp => {
-            console.log(resp);
+            this._renderOrders(resp);
+        });
+    }
+    _renderOrders(orders) {
+        const root = document.querySelector('.panel__summary');
+        const proto = document.querySelector('.summary__item--prototype');
+        orders.forEach(order => {
+            // data I got from DataBase
+            const { name, nrAdult, nrChild, adultPrice, childPrice } = order;
+            const summaryDescr = `dorośli: ${nrAdult} x ${adultPrice} PLN,
+            dzieci: ${nrChild} x ${childPrice} PLN`
+
+            // clone node
+            const orderItem = proto.cloneNode(true);
+            orderItem.classList.remove('summary__item--prototype')
+
+            const excursionSum = `${nrAdult * adultPrice + nrChild * childPrice} PLN `;
+
+            orderItem.querySelector('.summary__name').innerText = name;
+            orderItem.querySelector('.summay__total-price').innerText = excursionSum;
+            orderItem.querySelector('.summary__prices').innerText = summaryDescr;
+            
+            root.appendChild(orderItem);
+
         });
     }
 }
