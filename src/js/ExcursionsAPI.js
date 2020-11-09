@@ -1,12 +1,9 @@
-// *********************
-// ******* TODO ********
-// *********************
-
-// - figure why I get 2 times the excursions from DB - probably in renderExcursions
-// - fix the id so every object on the server gets its own id
-// - write update excursion function in ExcursionsAPI 
+// TODO
+// - click anywhere to dismiss popup
+// - validate data from user
+// - order what is in the basket (orders)
 // - check for code repetition
-// - check if returning new Promise(resolved or rejected) is a way to go 
+
 
 
 class ExcursionsAPI {
@@ -34,6 +31,7 @@ class ExcursionsAPI {
     deleteExcursion(id) {
         return this._deleteFromServer(this.excursionsAPI, id)
     }
+
     // ************************
     // **** ORDER LIST ****
     // ************************
@@ -106,10 +104,8 @@ class ExcursionsAPI {
                 return Promise.reject(resp);
             } else {
                 return resp.json();
-                // this._renderExcursions();
             }
         })
-        
         // .catch(err => {
         //     console.log(err);
         // })

@@ -5,7 +5,6 @@ import ExcursionsView from './ExcursionsView';
 
 console.log('client');
 
-
 // **********************************
 // ************* APP ****************
 // **********************************
@@ -23,6 +22,12 @@ function init() {
 
 addToBasket();
 removeFromBasket();
+confirmOrder();
+
+
+// ************************
+// ****** FUNCTIONS *******
+// ************************
 
 function addToBasket() {
     const excursions = document.querySelector('.panel__excursions');
@@ -34,7 +39,8 @@ function addToBasket() {
         }
         return;
     });
-} 
+};
+
 function removeFromBasket() {
     const summary = document.querySelector('.summary');
 
@@ -48,11 +54,8 @@ function removeFromBasket() {
             api.deleteOrder(idToDelete);
             view._renderOrders();            
         }
-
-        // api.deleteOrder(id);
     });
-}
-
+};
 
 function addOrderToServer(event) {
     const curr = event.target;
@@ -78,6 +81,24 @@ function addOrderToServer(event) {
         view._renderOrders();
     });
 }
-function deleteOrderedExc(id) {
-    const delBtn = document.querySelector('.summary__btn-remove')
+function confirmOrder() {
+    const sendOrderBtn = document.querySelector('.order__field-submit');
+    sendOrderBtn.addEventListener('click', e => {
+        e.preventDefault();
+
+        const name = document.querySelector('input[name="name"]').value;
+        const mail = document.querySelector('input[name="email"]').value;
+        const price = document.querySelector('.order__total-price-value').innerText;
+
+        api.getOrders().then(orders => {
+            const basket = [];
+            orders.forEach(order => {
+                const { name, nrAdult, nrChild } = order;
+                console.log(order);
+                const excursion = `Destination ${name}. Dorośli: ${nrAdult}, dzieci: ${nrChild}. Suma do zapłaty: ${price}.\n`;
+                basket.push(excursion);
+            })
+            view._displayOrderSummary(name, mail, price, basket);
+        })
+    });
 }

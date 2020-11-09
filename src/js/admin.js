@@ -26,7 +26,6 @@ function init() {
 newExcursionForm.addEventListener('submit', e => {
     e.preventDefault();
     const excursion = createExcursion(e);
-
     admin.addExcursion(excursion).then(() => view._renderExcursions())
 });
 
@@ -40,61 +39,16 @@ panels.forEach(panel => {
         } = event;
 
         const parent = event.target.parentNode.parentNode.parentNode;
-        const idToDelete = parent.dataset.id;
+        const id = parent.dataset.id;
 
         if (target.value === 'usuń') {
-            if (idToDelete && idToDelete > 0) {
-                admin.deleteExcursion(idToDelete).then(() => {
-                    view._renderExcursions()
-                });
-            }
+            view._removeExcursion(id);
         }
         if (target.value === 'edytuj') {
-
-            const editForm = createEditForm();
-            const root = document.querySelector('body');
-            root.appendChild(editForm);
-            view._blurBackground(true);
-
-            editForm.addEventListener('submit', click => {
-                click.preventDefault();
-
-                const elements = click.target.elements;
-                const id = parent.dataset.id;
-
-                const dataToUpdate = {
-                    name: elements.name.value,
-                    description: elements.description.value,
-                    adultPrice: elements.price__adult.value,
-                    childPrice: elements.price__child.value
-                }
-
-                editForm.classList.remove('form__active');
-                view._blurBackground(false);
-                admin.editExcursion(id, dataToUpdate).then(() => {
-                    const excursions = admin.getExcursions();
-                    view._renderExcursions(excursions);
-                }).catch(err => console.log(err));
-                // root.addEventListener('click', () => {
-                //     editForm.classList.remove('form__active');
-                // })
-            });
-
-
+            view._editExcursion(parent);
         }
-
     })
 });
-
-function createEditForm() {
-    const editForm = document.querySelector('.form').cloneNode(true);
-    editForm.classList.add('form__edit', 'form__active');
-    const editInfo = 'Enter new excursion data and click enter';
-    const editHeader = document.createElement('h3');
-    editHeader.innerText = editInfo;
-    editForm.prepend(editHeader);
-    return editForm;
-}
 
 function createExcursion(event) {
     const {
@@ -107,7 +61,6 @@ function createExcursion(event) {
         description: elements.description.value,
         adultPrice: elements.price__adult.value,
         childPrice: elements.price__child.value,
-        totalPrice 
     };
     return excursion;
 }
