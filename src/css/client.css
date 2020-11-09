@@ -27,6 +27,9 @@ ul {
 .panel__excursins {
     width: 70%;
 }
+.panel__summary-hidden {
+    display: none;
+}
 
 .excursions {
     display: flex;
@@ -57,5 +60,8 @@ ul {
     padding-bottom: 20px;
 }
 .excursions__item--prototype {
+    display: none;
+}
+.summary__item--prototype {
     display: none;
 }

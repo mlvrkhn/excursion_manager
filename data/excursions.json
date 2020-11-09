@@ -1,107 +1,63 @@
 {
   "excursions": [
     {
-      "name": "Grecja",
-      "description": "Martin",
-      "adultPrice": "88",
-      "childPrice": "99",
-      "id": 1
+      "name": "Martin",
+      "description": "1111a",
+      "adultPrice": "111",
+      "childPrice": "1111",
+      "id": 6
     },
     {
-      "name": "dark olive green",
-      "description": "dsadsad",
-      "adultPrice": "1212",
-      "childPrice": "2121",
-      "id": 2
+      "name": "Polska",
+      "description": "1111a",
+      "adultPrice": "111",
+      "childPrice": "1111",
+      "id": 7
     },
     {
-      "name": "dark olive green",
-      "description": "dsadsad",
-      "adultPrice": "1212",
-      "childPrice": "2121",
-      "id": 3
+      "name": "Niemcy",
+      "description": "22",
+      "adultPrice": "22",
+      "childPrice": "22",
+      "id": 8
     }
   ],
   "orders": [
     {
-      "name": "dark olive green",
-      "adultPrice": "1212",
-      "childPrice": "2121",
-      "nrAdult": 3,
-      "nrChild": 2,
-      "id": 11
-    },
-    {
-      "name": "dark olive green",
-      "adultPrice": "1212",
-      "childPrice": "2121",
-      "nrAdult": 3,
-      "nrChild": 2,
-      "id": 12
-    },
-    {
-      "name": "Grecja",
-      "adultPrice": "88",
-      "childPrice": "99",
-      "nrAdult": 3,
-      "nrChild": 2,
+      "name": "Polska",
+      "adultPrice": 111,
+      "childPrice": 1111,
+      "nrAdult": 1,
+      "nrChild": 1,
+      "totalPrice": 1222,
       "id": 13
     },
     {
-      "name": "Grecja",
-      "adultPrice": "88",
-      "childPrice": "99",
-      "nrAdult": 3,
+      "name": "Martin",
+      "adultPrice": 111,
+      "childPrice": 1111,
+      "nrAdult": 2,
       "nrChild": 2,
-      "id": 14
-    },
-    {
-      "name": "Grecja",
-      "adultPrice": "88",
-      "childPrice": "99",
-      "nrAdult": 323,
-      "nrChild": 222,
-      "id": 15
-    },
-    {
-      "name": "dark olive green",
-      "adultPrice": "1212",
-      "childPrice": "2121",
-      "nrAdult": 3,
-      "nrChild": 2,
+      "totalPrice": 2444,
       "id": 16
     },
     {
-      "name": "dark olive green",
-      "adultPrice": "1212",
-      "childPrice": "2121",
-      "nrAdult": 3,
+      "name": "Niemcy",
+      "adultPrice": 22,
+      "childPrice": 22,
+      "nrAdult": 2,
       "nrChild": 2,
+      "totalPrice": 88,
       "id": 17
     },
     {
-      "name": "dark olive green",
-      "adultPrice": 1212,
-      "childPrice": 2121,
-      "nrAdult": 3,
-      "nrChild": 2,
-      "id": 18
-    },
-    {
-      "name": "dark olive green",
-      "adultPrice": 1212,
-      "childPrice": 2121,
+      "name": "Niemcy",
+      "adultPrice": 22,
+      "childPrice": 22,
       "nrAdult": 2,
       "nrChild": 2,
-      "id": 19
-    },
-    {
-      "name": "dark olive green",
-      "adultPrice": 1212,
-      "childPrice": 2121,
-      "nrAdult": 3,
-      "nrChild": 2,
-      "id": 20
+      "totalPrice": 88,
+      "id": 18
     }
   ]
 }

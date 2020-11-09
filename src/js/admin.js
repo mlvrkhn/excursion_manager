@@ -75,7 +75,11 @@ panels.forEach(panel => {
                     const excursions = admin.getExcursions();
                     view._renderExcursions(excursions);
                 }).catch(err => console.log(err));
+                // root.addEventListener('click', () => {
+                //     editForm.classList.remove('form__active');
+                // })
             });
+
 
         }
 
@@ -102,7 +106,8 @@ function createExcursion(event) {
         name: elements.name.value,
         description: elements.description.value,
         adultPrice: elements.price__adult.value,
-        childPrice: elements.price__child.value
+        childPrice: elements.price__child.value,
+        totalPrice 
     };
     return excursion;
 }
