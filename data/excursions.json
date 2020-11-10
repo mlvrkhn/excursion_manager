@@ -22,5 +22,33 @@
       "id": 6
     }
   ],
-  "orders": []
+  "orders": [
+    {
+      "name": "Polska",
+      "adultPrice": 233,
+      "childPrice": 33,
+      "nrAdult": 1,
+      "nrChild": 1,
+      "totalPrice": 266,
+      "id": 1
+    },
+    {
+      "name": "Polska",
+      "adultPrice": 233,
+      "childPrice": 33,
+      "nrAdult": 1,
+      "nrChild": 1,
+      "totalPrice": 266,
+      "id": 2
+    },
+    {
+      "name": "Polska",
+      "adultPrice": 233,
+      "childPrice": 33,
+      "nrAdult": 1,
+      "nrChild": 1,
+      "totalPrice": 266,
+      "id": 3
+    }
+  ]
 }
