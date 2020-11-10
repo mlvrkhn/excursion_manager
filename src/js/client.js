@@ -21,6 +21,7 @@ function init() {
     view._renderOrders();
 }
 
+// api._addToBasket();
 addToBasket();
 removeFromBasket();
 confirmOrder();

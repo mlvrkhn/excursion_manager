@@ -5,6 +5,10 @@
 
 // import ExcursionsView from './ExcursionsView';
 // const v = new ExcursionsView();
+import ExcursionsAPI from './ExcursionsAPI';
+import ExcursionsView from './ExcursionsView';
+const admin = new ExcursionsAPI();
+const view = new ExcursionsView();
 
 class ExcursionsAPI {
     constructor() {
@@ -14,6 +18,29 @@ class ExcursionsAPI {
         this.excursionsAPI = 'http://localhost:3000/excursions/';
         this.ordersAPI = 'http://localhost:3000/orders/';
     };
+
+    _listenForExcursions() {
+        const newExcursionForm = document.querySelector('.form');
+        newExcursionForm.addEventListener('submit', e => {
+            e.preventDefault();
+            const excursion = this._createExcursion(e);
+            admin.addExcursion(excursion).then(() => view._renderExcursions())
+        });
+    }
+    _createExcursion(event) {
+        const {
+            target: {
+                elements
+            }
+        } = event;
+        const excursion = {
+            name: elements.name.value,
+            description: elements.description.value,
+            adultPrice: elements.price__adult.value,
+            childPrice: elements.price__child.value,
+        };
+        return excursion;
+    }
 
     // ************************
     // **** EXCURSION LIST ****
@@ -53,10 +80,12 @@ class ExcursionsAPI {
     _removeAllOrders() {
         this.getOrders().then(orders => {
             orders.forEach(ord => {
-                const { id } = ord;
+                const {
+                    id
+                } = ord;
                 this.deleteOrder(id);
             });
-            
+
         });
     };
 
