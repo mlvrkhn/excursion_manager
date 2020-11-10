@@ -10,21 +10,24 @@ console.log('admin');
 
 const admin = new ExcursionsAPI();
 const view = new ExcursionsView();
+const newExcursionForm = document.querySelector('.form');
 
 document.addEventListener('DOMContentLoaded', init);
 
 function init() {
     view._renderExcursions();
-
+    // admin.deleteExcursion();
 }
 
 // *****************************
 // ADMIN CAN ADD NEW EXCURSIONS
 // *****************************
 
-admin._listenForExcursions();
-admin._manageExcursions();
-
+newExcursionForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const excursion = createExcursion(e);
+    admin.addExcursion(excursion).then(() => view._renderExcursions())
+});
 
 const panels = document.querySelectorAll('.excursions');
 panels.forEach(panel => {
@@ -46,3 +49,18 @@ panels.forEach(panel => {
         }
     })
 });
+
+function createExcursion(event) {
+    const {
+        target: {
+            elements
+        }
+    } = event;
+    const excursion = {
+        name: elements.name.value,
+        description: elements.description.value,
+        adultPrice: elements.price__adult.value,
+        childPrice: elements.price__child.value,
+    };
+    return excursion;
+}
