@@ -50,7 +50,6 @@ ul {
 .panel__form {
     padding: 20px;
     width: 30%;
-    /* border: 1px solid sandybrown; */
     border-radius: 8px;
 }
 
@@ -64,4 +63,28 @@ ul {
 }
 .summary__item--prototype {
     display: none;
+}
+.form__edit {
+    display: none;
+    border: 2px solid darkgreen;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+    height: 400px;
+    padding: 20px;
+}
+.form__active > * {
+    margin: 10px 0;
+}
+.form__edit > ul {
+    margin: 10px 0;
+    list-style-type: circle;
+}
+.background__blur {
+    filter: blur(4px);
+}
+.form__active {
+    display: block;
 }

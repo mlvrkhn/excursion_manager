@@ -4,7 +4,8 @@
 // - order what is in the basket (orders)
 // - check for code repetition
 
-
+// import ExcursionsView from './ExcursionsView';
+// const v = new ExcursionsView();
 
 class ExcursionsAPI {
     constructor() {
@@ -50,6 +51,15 @@ class ExcursionsAPI {
     deleteOrder(id) {
         return this._deleteFromServer(this.ordersAPI, id)
     }
+    _removeAllOrders() {
+        this.getOrders().then(orders => {
+            orders.forEach(ord => {
+                const { id } = ord;
+                this.deleteOrder(id);
+            });
+            
+        });
+    };
 
     // *******************************
     // ****** TALKING TO SERVER ******

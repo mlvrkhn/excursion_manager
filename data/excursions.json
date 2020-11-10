@@ -12,52 +12,15 @@
       "description": "121121",
       "adultPrice": "233",
       "childPrice": "33",
-      "id": 2
+      "id": 5
     },
     {
-      "name": "Polska",
-      "description": "121121",
-      "adultPrice": "233",
-      "childPrice": "33",
-      "id": 5
+      "name": "Walackje",
+      "description": "sald",
+      "adultPrice": "123",
+      "childPrice": "445",
+      "id": 6
     }
   ],
-  "orders": [
-    {
-      "name": "forrest green",
-      "adultPrice": 121,
-      "childPrice": 12,
-      "nrAdult": 2,
-      "nrChild": 11,
-      "totalPrice": 374,
-      "id": 1
-    },
-    {
-      "name": "forrest green",
-      "adultPrice": 121,
-      "childPrice": 12,
-      "nrAdult": 1,
-      "nrChild": 2,
-      "totalPrice": 145,
-      "id": 2
-    },
-    {
-      "name": "Polska",
-      "adultPrice": 233,
-      "childPrice": 33,
-      "nrAdult": 1,
-      "nrChild": 12,
-      "totalPrice": 629,
-      "id": 3
-    },
-    {
-      "name": "forrest green",
-      "adultPrice": 121,
-      "childPrice": 12,
-      "nrAdult": 1,
-      "nrChild": 2,
-      "totalPrice": 145,
-      "id": 4
-    }
-  ]
+  "orders": []
 }

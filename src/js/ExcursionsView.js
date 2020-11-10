@@ -97,7 +97,7 @@ class ExcursionsView {
         const prototype = this.orderProto.cloneNode(true);
         const root = document.querySelector('.summary');
 
-        this._cleanOrdersView();
+        this._clearOrdersView();
         
         admin.getOrders().then(resp => {
             resp.forEach(order => {
@@ -121,7 +121,7 @@ class ExcursionsView {
         this._updateBasketTotal()
     };
 
-    _cleanOrdersView() {
+    _clearOrdersView() {
         const root = document.querySelector('.summary');
         while (root.childNodes.length > 1) {
             root.removeChild(root.lastChild);
@@ -132,25 +132,48 @@ class ExcursionsView {
         admin.getOrders().then(resp => {
             const sumka = resp.reduce((total, order) => order.totalPrice + total, 0);
             document.querySelector('.order__total-price-value').innerText = `${sumka} PLN`;
-            });
+        });
     };
 
     _displayOrderSummary(name, email, price, orders) {
         const root = document.querySelector('body');
-        const summary = `Congrats ${name}! \n
-            You have ordered following excursions:\n
-            ${orders}.\n
-            Total sum would be: ${price}.\n
-            We will send you the receipts to ${email}`;
+        const popUpSummary = document.createElement('div');
+        const titleSummary = document.createElement('h3');
+        const infoSummary = document.createElement('p');
+        const orderSummaryList = document.createElement('ul');
+        const totalSummarySum = document.createElement('p');
+        const eMailAddress = document.createElement('p');
         
-        const popUp = document.createElement('div');
-        popUp.innerText = summary;
-        popUp.classList.add('form__edit', 'form__active');
-        popUp.style.border = '1px solid green';
+        titleSummary.textContent = `Congrats ${name}!`;
+        totalSummarySum.textContent = price;
+        eMailAddress.textContent = `We will send the tickets to ${email}`;
 
-        root.appendChild(popUp);
+        infoSummary.textContent = `You have ordered following excursions:`;
+        orders.forEach(ord => {
+            const el = document.createElement('li');
+            el.textContent = ord;
+            orderSummaryList.appendChild(el);
+        })
 
-        // this._blurBackground(true);
+        popUpSummary.classList.add('form__edit', 'form__active');
+        popUpSummary.appendChild(titleSummary);
+        popUpSummary.appendChild(infoSummary);
+        popUpSummary.appendChild(orderSummaryList);
+        popUpSummary.appendChild(totalSummarySum);
+        popUpSummary.appendChild(eMailAddress);
+
+        root.appendChild(popUpSummary);
+
+        this._blurBackground(true);
+
+        if (popUpSummary) {
+            document.querySelector('body').addEventListener('click', () => {
+                popUpSummary.classList.remove('form__active');
+                this._blurBackground(false);
+                admin._removeAllOrders();
+                document.querySelector('.summary').innerHTML = '';
+            });
+        }
     };
     
 }

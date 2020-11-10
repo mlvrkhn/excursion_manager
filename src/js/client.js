@@ -94,8 +94,7 @@ function confirmOrder() {
             const basket = [];
             orders.forEach(order => {
                 const { name, nrAdult, nrChild } = order;
-                console.log(order);
-                const excursion = `Destination ${name}. Dorośli: ${nrAdult}, dzieci: ${nrChild}. Suma do zapłaty: ${price}.\n`;
+                const excursion = `${name}.\n Dorośli: ${nrAdult}, dzieci: ${nrChild}. Suma: ${price}.`;
                 basket.push(excursion);
             })
             view._displayOrderSummary(name, mail, price, basket);
