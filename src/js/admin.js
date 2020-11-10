@@ -22,6 +22,7 @@ function init() {
 // *****************************
 // ADMIN CAN ADD NEW EXCURSIONS
 // *****************************
+_listenForExcursions();
 
 newExcursionForm.addEventListener('submit', e => {
     e.preventDefault();
@@ -31,7 +32,7 @@ newExcursionForm.addEventListener('submit', e => {
 
 const panels = document.querySelectorAll('.excursions');
 panels.forEach(panel => {
-
+    
     panel.addEventListener('click', event => {
         event.preventDefault();
         const {
@@ -40,7 +41,7 @@ panels.forEach(panel => {
 
         const parent = event.target.parentNode.parentNode.parentNode;
         const id = parent.dataset.id;
-
+        
         if (target.value === 'usuń') {
             view._removeExcursion(id);
         }
@@ -49,6 +50,15 @@ panels.forEach(panel => {
         }
     })
 });
+
+function _listenForExcursions() {
+    const newExcursionForm = document.querySelector('.form');
+    newExcursionForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const excursion = createExcursion(e);
+        admin.addExcursion(excursion).then(() => view._renderExcursions())
+    });
+}
 
 function createExcursion(event) {
     const {

@@ -1,7 +1,6 @@
 // TODO
-// - click anywhere to dismiss popup
-// - validate data from user
-// - order what is in the basket (orders)
+
+// - validate order and validate user data
 // - check for code repetition
 
 // import ExcursionsView from './ExcursionsView';
@@ -10,7 +9,7 @@
 class ExcursionsAPI {
     constructor() {
         this.excursionRoot = document.querySelector('.panel__excursions');
-        this.excursionProtoSelector = 'excursions__item--prototype'
+        this.excursionProtoSelector = 'excursions__item--prototype';
         this.excursionProto = document.querySelector('.excursions__item--prototype');
         this.excursionsAPI = 'http://localhost:3000/excursions/';
         this.ordersAPI = 'http://localhost:3000/orders/';
@@ -21,16 +20,16 @@ class ExcursionsAPI {
     // ************************
 
     getExcursions() {
-        return this._getFromServer(this.excursionsAPI)
+        return this._getFromServer(this.excursionsAPI);
     };
     addExcursion(data) {
         return this._sendToServer(this.excursionsAPI, data);
     };
     editExcursion(id, data) {
-        return this._updateToServer(this.excursionsAPI, data, id)
+        return this._updateToServer(this.excursionsAPI, data, id);
     }
     deleteExcursion(id) {
-        return this._deleteFromServer(this.excursionsAPI, id)
+        return this._deleteFromServer(this.excursionsAPI, id);
     }
 
     // ************************
@@ -38,7 +37,7 @@ class ExcursionsAPI {
     // ************************
 
     getOrders() {
-        return this._getFromServer(this.ordersAPI)
+        return this._getFromServer(this.ordersAPI);
     };
 
     addOrder(data) {
@@ -46,18 +45,20 @@ class ExcursionsAPI {
     };
 
     editOrder(id, data) {
-        return this._updateToServer(this.ordersAPI, data, id)
+        return this._updateToServer(this.ordersAPI, data, id);
     }
     deleteOrder(id) {
-        return this._deleteFromServer(this.ordersAPI, id)
+        return this._deleteFromServer(this.ordersAPI, id);
     }
     _removeAllOrders() {
         this.getOrders().then(orders => {
             orders.forEach(ord => {
-                const { id } = ord;
+                const {
+                    id
+                } = ord;
                 this.deleteOrder(id);
             });
-            
+
         });
     };
 
@@ -103,9 +104,8 @@ class ExcursionsAPI {
                 'Content-Type': 'application/json'
             }
         }
-        return this._fetch(url, options, id)
+        return this._fetch(url, options, id);
     };
-
 
     _fetch(url, options, route = '') {
 
@@ -116,9 +116,6 @@ class ExcursionsAPI {
                 return resp.json();
             }
         })
-        // .catch(err => {
-        //     console.log(err);
-        // })
     }
 }
 
