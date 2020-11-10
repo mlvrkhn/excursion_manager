@@ -2,25 +2,44 @@
   "excursions": [
     {
       "name": "forrest green",
-      "description": "121",
-      "adultPrice": "121",
+      "description": "12",
+      "adultPrice": "12",
       "childPrice": "12",
+      "id": 10
+    },
+    {
+      "name": "Martin Gawlyta",
+      "description": "afafa",
+      "adultPrice": "22",
+      "childPrice": "33",
+      "id": 11
+    },
+    {
+      "name": "Martin AD",
+      "description": "afafa",
+      "adultPrice": "22",
+      "childPrice": "333",
+      "id": 12
+    }
+  ],
+  "orders": [
+    {
+      "name": "Martin Gawlyta",
+      "adultPrice": 1223,
+      "childPrice": 333,
+      "nrAdult": 1,
+      "nrChild": 1,
+      "totalPrice": 1556,
       "id": 1
     },
     {
-      "name": "Polska",
-      "description": "121121",
-      "adultPrice": "233",
-      "childPrice": "33",
-      "id": 5
-    },
-    {
-      "name": "Walackje",
-      "description": "sald",
-      "adultPrice": "123",
-      "childPrice": "445",
-      "id": 6
+      "name": "Martin Gawlyta",
+      "adultPrice": 1223,
+      "childPrice": 333,
+      "nrAdult": 1,
+      "nrChild": 1,
+      "totalPrice": 1556,
+      "id": 2
     }
-  ],
-  "orders": []
+  ]
 }

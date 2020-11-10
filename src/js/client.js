@@ -3,8 +3,6 @@ import './../css/client.css';
 import ExcursionsAPI from './ExcursionsAPI';
 import ExcursionsView from './ExcursionsView';
 
-console.log('client');
-
 // **********************************
 // ************* APP ****************
 // **********************************
@@ -13,7 +11,6 @@ const api = new ExcursionsAPI();
 const view = new ExcursionsView();
 
 document.addEventListener('DOMContentLoaded', init)
-
 
 function init() {
     view._renderExcursions();
