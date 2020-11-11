@@ -2,6 +2,7 @@ class DataValidator {
     
     _validateOrder(val1, val2) {
         if (typeof val1 === 'number' && typeof val2 === 'number') {
+            console.log('data validated');
             return true;
         } else {
             throw new Error('Both values must be numbers!')

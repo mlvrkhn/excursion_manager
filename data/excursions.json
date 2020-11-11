@@ -22,24 +22,5 @@
       "id": 12
     }
   ],
-  "orders": [
-    {
-      "name": "Martin Gawlyta",
-      "adultPrice": 1223,
-      "childPrice": 333,
-      "nrAdult": 1,
-      "nrChild": 1,
-      "totalPrice": 1556,
-      "id": 1
-    },
-    {
-      "name": "Martin Gawlyta",
-      "adultPrice": 1223,
-      "childPrice": 333,
-      "nrAdult": 1,
-      "nrChild": 1,
-      "totalPrice": 1556,
-      "id": 2
-    }
-  ]
+  "orders": []
 }
