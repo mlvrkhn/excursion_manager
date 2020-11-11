@@ -2,27 +2,6 @@
   "excursions": [
     {
       "name": "forrest green",
-      "description": "12",
-      "adultPrice": "12",
-      "childPrice": "12",
-      "id": 10
-    },
-    {
-      "name": "Anakonda",
-      "description": "w Argentynie",
-      "adultPrice": "980",
-      "childPrice": "1100",
-      "id": 11
-    },
-    {
-      "name": "Martin AD",
-      "description": "afafa",
-      "adultPrice": "22",
-      "childPrice": "333",
-      "id": 12
-    },
-    {
-      "name": "forrest green",
       "description": "ads",
       "adultPrice": "12",
       "childPrice": "22",
@@ -41,13 +20,6 @@
       "adultPrice": "1000",
       "childPrice": "0",
       "id": 15
-    },
-    {
-      "name": "forrest green",
-      "description": "22",
-      "adultPrice": "22",
-      "childPrice": "22",
-      "id": 16
     }
   ],
   "orders": []

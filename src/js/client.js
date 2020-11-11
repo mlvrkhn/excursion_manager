@@ -1,14 +1,14 @@
 import './../css/client.css';
-import ExcursionsView from './ExcursionsView';
+import ExcursionsManager from './ExcursionsManager';
+const app = new ExcursionsManager();
 
-const view = new ExcursionsView();
 
 document.addEventListener('DOMContentLoaded', init)
 
 function init() {
-    view._renderExcursions();
-    view._renderOrders();
-    view._confirmOrder();
-    view._removeFromBasket();
-    view._addToBasket();
+    app._renderExcursions();
+    app._renderOrders();
+    app._confirmOrder();
+    app._removeFromBasket();
+    app._addToBasket();
 };

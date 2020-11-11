@@ -1,11 +1,3 @@
-// TODO
-
-// - validate order and validate user data
-// - check for code repetition
-
-// import ExcursionsView from './ExcursionsView';
-// const v = new ExcursionsView();
-
 class ExcursionsAPI {
     constructor() {
         this.excursionRoot = document.querySelector('.panel__excursions');
@@ -15,9 +7,7 @@ class ExcursionsAPI {
         this.ordersAPI = 'http://localhost:3000/orders/';
     };
 
-    // ************************
     // **** EXCURSION LIST ****
-    // ************************
 
     getExcursions() {
         return this._getFromServer(this.excursionsAPI);
@@ -32,9 +22,7 @@ class ExcursionsAPI {
         return this._deleteFromServer(this.excursionsAPI, id);
     }
 
-    // ************************
     // **** ORDER LIST ****
-    // ************************
 
     getOrders() {
         return this._getFromServer(this.ordersAPI);
@@ -61,9 +49,7 @@ class ExcursionsAPI {
         });
     };
 
-    // *******************************
     // ****** TALKING TO SERVER ******
-    // *******************************
 
     _getFromServer(url) {
         return this._fetch(url);

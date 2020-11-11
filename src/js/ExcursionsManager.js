@@ -3,7 +3,7 @@ import DataValidator from './DataValidator';
 const api = new ExcursionsAPI()
 const validator = new DataValidator()
 
-class ExcursionsView {
+class ExcursionManager {
     constructor() {
         this.excursionRoot = document.querySelector('.panel__excursions');
         this.excursionProto = document.querySelector('.excursions__item--prototype');
@@ -118,9 +118,7 @@ class ExcursionsView {
         return;
     };
 
-    // ***********************
     // ******* ORDERS ********
-    // ***********************
 
     _removeFromBasket() {
         const summary = document.querySelector('.summary');
@@ -326,4 +324,4 @@ class ExcursionsView {
     }
 }
 
-export default ExcursionsView;
+export default ExcursionManager;
