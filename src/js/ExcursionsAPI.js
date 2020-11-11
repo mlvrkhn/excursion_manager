@@ -51,14 +51,13 @@ class ExcursionsAPI {
         return this._deleteFromServer(this.ordersAPI, id);
     }
     _removeAllOrders() {
-        this.getOrders().then(orders => {
+        return this.getOrders().then(orders => {
             orders.forEach(ord => {
                 const {
                     id
                 } = ord;
                 this.deleteOrder(id);
             });
-
         });
     };
 

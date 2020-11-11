@@ -15,16 +15,14 @@ const validator = new DataValidator();
 
 document.addEventListener('DOMContentLoaded', init)
 
-
 function init() {
     view._renderExcursions();
     view._renderOrders();
+    view._confirmOrder();
 }
 
-// api._addToBasket();
 addToBasket();
 removeFromBasket();
-confirmOrder();
 
 
 // ************************
@@ -38,35 +36,16 @@ function addToBasket() {
 
         if (event.target.value === 'dodaj do zamówienia') {
             addOrderToServer(event);
-            // view._renderOrders();
         }
         return;
     });
 };
 
-function removeFromBasket() {
-    const summary = document.querySelector('.summary');
-
-    summary.addEventListener('click', e => {
-        e.preventDefault();
-
-        if (e.target.innerText === 'X') {
-            const nodeToDelete = e.target.parentNode.parentNode;
-            const idToDelete = nodeToDelete.dataset.Id;
-
-            api.deleteOrder(idToDelete);
-            view._renderOrders();
-        }
-    });
-};
-
 function addOrderToServer(event) {
-
     const curr = event.target;
     const root = curr.parentNode.parentNode.parentNode;
 
     const name = root.querySelector('.excursions__title').textContent;
-
     const nrAdult = parseInt(root.querySelector('.excursions__field-input-adult').value);
     const nrChild = parseInt(root.querySelector('.excursions__field-input-child').value);
     const adultPrice = parseInt(root.querySelector('.excursions__field-price-adult').innerText);
@@ -93,33 +72,17 @@ function addOrderToServer(event) {
     }
 }
 
-function confirmOrder() {
-    const sendOrderBtn = document.querySelector('.order__field-submit');
-    sendOrderBtn.addEventListener('click', e => {
+function removeFromBasket() {
+    const summary = document.querySelector('.summary');
+
+    summary.addEventListener('click', e => {
         e.preventDefault();
+        if (e.target.innerText === 'X') {
+            const nodeToDelete = e.target.parentNode.parentNode;
+            const idToDelete = nodeToDelete.dataset.Id;
 
-        const name = document.querySelector('input[name="name"]').value;
-        const mail = document.querySelector('input[name="email"]').value;
-        const price = document.querySelector('.order__total-price-value').innerText;
-
-        const validCustomerData = validator._validateCustomerData(name, mail);
-
-        if (validCustomerData) {
-            api.getOrders().then(orders => {
-                const basket = [];
-                orders.forEach(order => {
-                    const {
-                        name,
-                        nrAdult,
-                        nrChild
-                    } = order;
-                    const excursion = `${name}.\n Dorośli: ${nrAdult}, dzieci: ${nrChild}. Suma: ${price}.`;
-                    basket.push(excursion);
-                })
-                view._displayOrderSummary(name, mail, price, basket);
-            })
-        } else {
-            throw new Error('Invalid data');
+            api.deleteOrder(idToDelete);
+            view._renderOrders();
         }
     });
-}
+};

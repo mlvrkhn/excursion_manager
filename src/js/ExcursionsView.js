@@ -1,5 +1,7 @@
 import ExcursionsAPI from './ExcursionsAPI';
-const admin = new ExcursionsAPI()
+import DataValidator from './DataValidator';
+const api = new ExcursionsAPI()
+const validator = new DataValidator()
 
 class ExcursionsView {
     constructor() {
@@ -7,6 +9,29 @@ class ExcursionsView {
         this.excursionProto = document.querySelector('.excursions__item--prototype');
         this.orderProto = document.querySelector('.summary__item--prototype');
         this.excursionProtoSelector = 'excursions__item--prototype';
+    };
+
+    _listenForEditDelete() {
+        const panels = document.querySelectorAll('.excursions');
+        panels.forEach(panel => {
+
+            panel.addEventListener('click', event => {
+                event.preventDefault();
+                const {
+                    target
+                } = event;
+
+                const parent = event.target.parentNode.parentNode.parentNode;
+                const id = parent.dataset.id;
+
+                if (target.value === 'usuń') {
+                    this._removeExcursion(id);
+                }
+                if (target.value === 'edytuj') {
+                    this._editExcursion(parent);
+                }
+            })
+        });
     };
 
     _editExcursion(element) {
@@ -30,8 +55,8 @@ class ExcursionsView {
 
             editForm.classList.remove('form__active');
             this._blurBackground(false);
-            admin.editExcursion(id, dataToUpdate).then(() => {
-                const excursions = admin.getExcursions();
+            api.editExcursion(id, dataToUpdate).then(() => {
+                const excursions = api.getExcursions();
                 this._renderExcursions(excursions);
             }).catch(err => console.log(err));
         });
@@ -39,10 +64,10 @@ class ExcursionsView {
 
     _removeExcursion(idToDelete) {
         if (idToDelete && idToDelete > 0) {
-                admin.deleteExcursion(idToDelete).then(() => {
-                    this._renderExcursions();
-                });
-            }
+            api.deleteExcursion(idToDelete).then(() => {
+                this._renderExcursions();
+            });
+        }
     }
 
     _createEditForm() {
@@ -59,7 +84,7 @@ class ExcursionsView {
         const prototype = this.excursionProto.cloneNode(true);
         this._clearExcursionView();
 
-        admin.getExcursions().then(excursions => {
+        api.getExcursions().then(excursions => {
             excursions.forEach(excursion => {
                 const newElement = prototype.cloneNode(true);
                 newElement.classList.remove(this.excursionProtoSelector);
@@ -79,7 +104,7 @@ class ExcursionsView {
     };
 
     _clearExcursionView() {
-        document.querySelector('.excursions').innerHTML = '';        
+        document.querySelector('.excursions').innerHTML = '';
     };
 
     _blurBackground(state) {
@@ -93,16 +118,27 @@ class ExcursionsView {
         return;
     };
 
+    // ***********************
+    // ******* ORDERS ********
+    // ***********************
+
     _renderOrders() {
         const prototype = this.orderProto.cloneNode(true);
         const root = document.querySelector('.summary');
 
         this._clearOrdersView();
-        
-        admin.getOrders().then(resp => {
+
+        api.getOrders().then(resp => {
             resp.forEach(order => {
-                const { name, nrAdult, nrChild, adultPrice, childPrice, id } = order;
-                
+                const {
+                    name,
+                    nrAdult,
+                    nrChild,
+                    adultPrice,
+                    childPrice,
+                    id
+                } = order;
+
                 const newElement = prototype.cloneNode(true);
                 const excursionSum = nrAdult * adultPrice + nrChild * childPrice;
                 const summaryDescr = `dorośli: ${nrAdult} x ${adultPrice} PLN,
@@ -112,9 +148,9 @@ class ExcursionsView {
                 newElement.querySelector('.summay__total-price').innerText = `${excursionSum} PLN`;
                 newElement.querySelector('.summary__prices').innerText = summaryDescr;
                 newElement.dataset.Id = id;
-                
+
                 newElement.classList.remove('summary__item--prototype');
-            
+
                 root.append(newElement);
             });
         });
@@ -129,7 +165,7 @@ class ExcursionsView {
     };
 
     _updateBasketTotal() {
-        admin.getOrders().then(resp => {
+        api.getOrders().then(resp => {
             const sumka = resp.reduce((total, order) => order.totalPrice + total, 0);
             document.querySelector('.order__total-price-value').innerText = `${sumka} PLN`;
         });
@@ -143,7 +179,7 @@ class ExcursionsView {
         const orderSummaryList = document.createElement('ul');
         const totalSummarySum = document.createElement('p');
         const eMailAddress = document.createElement('p');
-        
+
         titleSummary.textContent = `Congrats ${name}!`;
         totalSummarySum.textContent = price;
         eMailAddress.textContent = `We will send the tickets to ${email}`;
@@ -161,7 +197,6 @@ class ExcursionsView {
         popUpSummary.appendChild(orderSummaryList);
         popUpSummary.appendChild(totalSummarySum);
         popUpSummary.appendChild(eMailAddress);
-
         root.appendChild(popUpSummary);
 
         this._blurBackground(true);
@@ -170,12 +205,67 @@ class ExcursionsView {
             document.querySelector('body').addEventListener('click', () => {
                 popUpSummary.classList.remove('form__active');
                 this._blurBackground(false);
-                admin._removeAllOrders();
+                api._removeAllOrders();
                 document.querySelector('.summary').innerHTML = '';
             });
         }
     };
-    
+
+    _confirmOrder() {
+        const sendOrderBtn = document.querySelector('.order__field-submit');
+        sendOrderBtn.addEventListener('click', e => {
+            e.preventDefault();
+
+            const name = document.querySelector('input[name="name"]').value;
+            const mail = document.querySelector('input[name="email"]').value;
+            const price = document.querySelector('.order__total-price-value').innerText;
+
+            const validCustomerData = validator._validateCustomerData(name, mail);
+
+            if (validCustomerData) {
+                api.getOrders().then(orders => {
+                    const basket = [];
+                    orders.forEach(order => {
+                        const {
+                            name,
+                            nrAdult,
+                            nrChild
+                        } = order;
+                        const excursion = `${name}.\n Dorośli: ${nrAdult}, dzieci: ${nrChild}. Suma: ${price}.`;
+                        basket.push(excursion);
+                    })
+                    this._displayOrderSummary(name, mail, price, basket);
+                })
+            } else {
+                throw new Error('Invalid data');
+            }
+        });
+    };
+
+    _listenForAddExcursion() {
+        const newExcursionForm = document.querySelector('.form');
+
+        newExcursionForm.addEventListener('submit', e => {
+            e.preventDefault();
+            const excursion = this._createExcursion(e);
+            api.addExcursion(excursion).then(() => this._renderExcursions())
+        });
+    };
+
+    _createExcursion(event) {
+        const {
+            target: {
+                elements
+            }
+        } = event;
+        const excursion = {
+            name: elements.name.value,
+            description: elements.description.value,
+            adultPrice: elements.price__adult.value,
+            childPrice: elements.price__child.value,
+        };
+        return excursion;
+    }
 }
 
 export default ExcursionsView;
