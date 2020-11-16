@@ -1,13 +1,13 @@
 class DataValidator {
     
-    _validateOrder(val1, val2) {
+    validateOrder(val1, val2) {
         if (typeof val1 === 'number' && typeof val2 === 'number') {
             return true;
         } else {
             throw new Error('Both values must be numbers!')
         }
     }
-    _validateCustomerData(name, mail) {
+    validateCustomerData(name, mail) {
         const validName = this._validateName(name);
         const validMail = this._validateMail(mail);
         if (validMail && validName) {
@@ -24,7 +24,7 @@ class DataValidator {
         }
     };
     _validateMail(mail) {
-        if (!mail.includes('@') || !mail.includes('.') || mail.length < 8) {
+        if (!mail.includes('@') && !mail.includes('.') && mail.length < 8) {
             throw new Error('Invalid email address!');
         } else {
             return true;

@@ -38,7 +38,7 @@ class ExcursionsAPI {
     deleteOrder(id) {
         return this._deleteFromServer(this.ordersAPI, id);
     }
-    _removeAllOrders() {
+    removeAllOrders() {
         return this.getOrders().then(orders => {
             orders.forEach(ord => {
                 const {

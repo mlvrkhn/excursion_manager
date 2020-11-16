@@ -6,7 +6,7 @@ const view = new ExcursionsManager();
 document.addEventListener('DOMContentLoaded', init);
 
 function init() {
-    view._renderExcursions();
-    view._listenForEditDelete();
-    view._listenForAddExcursion();
+    view.renderExcursions();
+    view.listenForEditDelete();
+    view.listenForAddExcursion();
 };

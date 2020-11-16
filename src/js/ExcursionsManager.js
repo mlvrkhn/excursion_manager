@@ -4,14 +4,18 @@ const api = new ExcursionsAPI()
 const validator = new DataValidator()
 
 class ExcursionManager {
-    constructor() {
-        this.excursionRoot = document.querySelector('.panel__excursions');
-        this.excursionProto = document.querySelector('.excursions__item--prototype');
-        this.orderProto = document.querySelector('.summary__item--prototype');
-        this.excursionProtoSelector = 'excursions__item--prototype';
+    constructor(
+        excRoot = '.panel__excursions',
+        excProto = '.excursions__item--prototype',
+        ordProto = '.summary__item--prototype')
+        
+        {
+        this.excursionRoot = document.querySelector(excRoot);
+        this.excursionProto = document.querySelector(excProto);
+        this.orderProto = document.querySelector(ordProto);
     };
 
-    _listenForEditDelete() {
+    listenForEditDelete() {
         const panels = document.querySelectorAll('.excursions');
         panels.forEach(panel => {
 
@@ -57,7 +61,7 @@ class ExcursionManager {
             this._blurBackground(false);
             api.editExcursion(id, dataToUpdate).then(() => {
                 const excursions = api.getExcursions();
-                this._renderExcursions(excursions);
+                this.renderExcursions(excursions);
             }).catch(err => console.log(err));
         });
     }
@@ -65,7 +69,7 @@ class ExcursionManager {
     _removeExcursion(idToDelete) {
         if (idToDelete && idToDelete > 0) {
             api.deleteExcursion(idToDelete).then(() => {
-                this._renderExcursions();
+                this.renderExcursions();
             });
         }
     }
@@ -80,14 +84,14 @@ class ExcursionManager {
         return editForm;
     };
 
-    _renderExcursions() {
+    renderExcursions() {
         const prototype = this.excursionProto.cloneNode(true);
         this._clearExcursionView();
 
         api.getExcursions().then(excursions => {
             excursions.forEach(excursion => {
                 const newElement = prototype.cloneNode(true);
-                newElement.classList.remove(this.excursionProtoSelector);
+                newElement.classList.remove('excursions__item--prototype');
                 newElement.querySelector('.excursions__title').textContent = excursion.name;
                 newElement.querySelector('.excursions__description').textContent = excursion.description;
                 newElement.querySelector('.excursions__field-price-adult').textContent = excursion.adultPrice;
@@ -120,7 +124,7 @@ class ExcursionManager {
 
     // ******* ORDERS ********
 
-    _removeFromBasket() {
+    removeFromBasket() {
         const summary = document.querySelector('.summary');
 
         summary.addEventListener('click', e => {
@@ -130,12 +134,12 @@ class ExcursionManager {
                 const idToDelete = nodeToDelete.dataset.Id;
 
                 api.deleteOrder(idToDelete);
-                this._renderOrders();
+                this.renderOrders();
             }
         });
     };
 
-    _renderOrders() {
+    renderOrders() {
         const prototype = this.orderProto.cloneNode(true);
         const root = document.querySelector('.summary');
 
@@ -186,12 +190,20 @@ class ExcursionManager {
 
     _displayOrderSummary(name, email, price, orders) {
         const root = document.querySelector('body');
+
         const popUpSummary = document.createElement('div');
         const titleSummary = document.createElement('h3');
         const infoSummary = document.createElement('p');
         const orderSummaryList = document.createElement('ul');
         const totalSummarySum = document.createElement('p');
         const eMailAddress = document.createElement('p');
+
+        this._createElementWithText('div', text, appendTo)
+        this._createElementWithText('div', text, appendTo)
+        this._createElementWithText('div', text, appendTo)
+        this._createElementWithText('div', text, appendTo)
+        this._createElementWithText('div', text, appendTo)
+        this._createElementWithText('div', text, appendTo)
 
         titleSummary.textContent = `Congrats ${name}!`;
         totalSummarySum.textContent = price;
@@ -218,13 +230,13 @@ class ExcursionManager {
             document.querySelector('body').addEventListener('click', () => {
                 popUpSummary.classList.remove('form__active');
                 this._blurBackground(false);
-                api._removeAllOrders();
+                api.removeAllOrders();
                 document.querySelector('.summary').innerHTML = '';
             });
         }
     };
 
-    _addToBasket() {
+    addToBasket() {
         const excursions = document.querySelector('.panel__excursions');
         excursions.addEventListener('click', event => {
             event.preventDefault();
@@ -247,7 +259,7 @@ class ExcursionManager {
         const childPrice = parseInt(root.querySelector('.excursions__field-price-child').innerText);
         const totalPrice = parseInt(nrAdult * adultPrice + nrChild * childPrice);
 
-        const validOrder = validator._validateOrder(nrAdult, nrChild);
+        const validOrder = validator.validateOrder(nrAdult, nrChild);
 
         if (validOrder) {
             const order = {
@@ -260,14 +272,14 @@ class ExcursionManager {
             };
 
             api.addOrder(order).then(() => {
-                this._renderOrders();
+                this.renderOrders();
             });
         } else {
             return;
         }
     };
 
-    _confirmOrder() {
+    confirmOrder() {
         const sendOrderBtn = document.querySelector('.order__field-submit');
         sendOrderBtn.addEventListener('click', e => {
             e.preventDefault();
@@ -276,7 +288,7 @@ class ExcursionManager {
             const mail = document.querySelector('input[name="email"]').value;
             const price = document.querySelector('.order__total-price-value').innerText;
 
-            const validCustomerData = validator._validateCustomerData(name, mail);
+            const validCustomerData = validator.validateCustomerData(name, mail);
 
             if (validCustomerData) {
                 api.getOrders().then(orders => {
@@ -298,13 +310,13 @@ class ExcursionManager {
         });
     };
 
-    _listenForAddExcursion() {
+    listenForAddExcursion() {
         const newExcursionForm = document.querySelector('.form');
 
         newExcursionForm.addEventListener('submit', e => {
             e.preventDefault();
             const excursion = this._createExcursion(e);
-            api.addExcursion(excursion).then(() => this._renderExcursions())
+            api.addExcursion(excursion).then(() => this.renderExcursions())
         });
     };
 
