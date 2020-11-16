@@ -1,7 +1,7 @@
 import './../css/admin.css';
-import ExcursionsView from './ExcursionsView';
+import ExcursionsManager from './ExcursionsManager';
 
-const view = new ExcursionsView();
+const view = new ExcursionsManager();
 
 document.addEventListener('DOMContentLoaded', init);
 
