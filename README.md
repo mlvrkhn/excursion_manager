@@ -21,7 +21,7 @@ All mentioned functionality is successfully introduced.
 - create DataValidator to monitor input data
 
 ## Code samples  
-<img src="./public/api_api.png" alt="api" width="550px"/>
-<img src="./public/api_validator.png" alt="validator" width="550px"/>  
+<img src="./public/api_api.png" alt="api"/>
+<img src="./public/api_validator.png" alt="validator"/>  
 
-##### Build with help of Mateusz Bogolubow, [Devmentor](www.devmentor.pl).
+##### Build with supervision of Mateusz Bogolubow, Senior Developer, [Devmentor](www.devmentor.pl).
